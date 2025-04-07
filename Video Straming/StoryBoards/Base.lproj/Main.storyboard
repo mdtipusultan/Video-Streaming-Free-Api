@@ -29,22 +29,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRx-aU-EhQ" userLabel="Video Player View">
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666666666666664"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-9q-4uu">
-                                                            <rect key="frame" x="349" y="8" width="24" height="14"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain"/>
-                                                            <connections>
-                                                                <action selector="muteTapped:" destination="WiW-Bt-CUj" eventType="touchUpInside" id="O5f-3g-C4o"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="TEL-9q-4uu" secondAttribute="trailing" constant="20" id="PQb-9T-Ws5"/>
-                                                        <constraint firstItem="TEL-9q-4uu" firstAttribute="top" secondItem="hRx-aU-EhQ" secondAttribute="top" constant="8" id="PzQ-BD-Iwt"/>
-                                                        <constraint firstItem="TEL-9q-4uu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hRx-aU-EhQ" secondAttribute="leading" constant="20" symbolic="YES" id="TF9-hv-GSd"/>
-                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -55,7 +40,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="muteButton" destination="TEL-9q-4uu" id="Bu8-Lz-Mij"/>
                                             <outlet property="videoContainerView" destination="hRx-aU-EhQ" id="sVM-rR-LQC"/>
                                         </connections>
                                     </tableViewCell>

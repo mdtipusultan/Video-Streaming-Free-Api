@@ -13,7 +13,7 @@ class MediaCell: UITableViewCell {
     static let identifier = "MediaCell"
 
     @IBOutlet weak var videoContainerView: UIView!
-    @IBOutlet weak var muteButton: UIButton!
+    //@IBOutlet weak var muteButton: UIButton!
 
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
@@ -48,7 +48,7 @@ class MediaCell: UITableViewCell {
             videoContainerView.layer.addSublayer(layer)
         }
 
-        muteButton.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
+       // muteButton.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
     }
 
     override func layoutSubviews() {
@@ -65,12 +65,12 @@ class MediaCell: UITableViewCell {
         player?.pause()
     }
 
-    @IBAction func muteTapped(_ sender: UIButton) {
-        guard let player = player else { return }
-        player.isMuted.toggle()
-        let icon = player.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"
-        muteButton.setImage(UIImage(systemName: icon), for: .normal)
-    }
+//    @IBAction func muteTapped(_ sender: UIButton) {
+//        guard let player = player else { return }
+//        player.isMuted.toggle()
+//        let icon = player.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"
+//        muteButton.setImage(UIImage(systemName: icon), for: .normal)
+//    }
 
     @objc private func handleTap() {
         guard let player = player else { return }
