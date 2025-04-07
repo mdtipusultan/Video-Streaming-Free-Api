@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Video_Straming" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Main View">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nlq-7v-W2e">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MediaCell" id="WiW-Bt-CUj" customClass="MediaCell" customModule="Video_Straming" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WiW-Bt-CUj" id="1iF-Xm-rac">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRx-aU-EhQ" userLabel="Video Player View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666666666666664"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-9q-4uu">
+                                                            <rect key="frame" x="349" y="8" width="24" height="14"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain"/>
+                                                            <connections>
+                                                                <action selector="muteTapped:" destination="WiW-Bt-CUj" eventType="touchUpInside" id="O5f-3g-C4o"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="TEL-9q-4uu" secondAttribute="trailing" constant="20" id="PQb-9T-Ws5"/>
+                                                        <constraint firstItem="TEL-9q-4uu" firstAttribute="top" secondItem="hRx-aU-EhQ" secondAttribute="top" constant="8" id="PzQ-BD-Iwt"/>
+                                                        <constraint firstItem="TEL-9q-4uu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hRx-aU-EhQ" secondAttribute="leading" constant="20" symbolic="YES" id="TF9-hv-GSd"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="hRx-aU-EhQ" secondAttribute="bottom" id="2VR-KO-m9i"/>
+                                                <constraint firstItem="hRx-aU-EhQ" firstAttribute="top" secondItem="1iF-Xm-rac" secondAttribute="top" id="6fl-4n-YWB"/>
+                                                <constraint firstItem="hRx-aU-EhQ" firstAttribute="leading" secondItem="1iF-Xm-rac" secondAttribute="leading" id="KDc-bi-ABc"/>
+                                                <constraint firstAttribute="trailing" secondItem="hRx-aU-EhQ" secondAttribute="trailing" id="wu6-0h-5vW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="muteButton" destination="TEL-9q-4uu" id="Bu8-Lz-Mij"/>
+                                            <outlet property="videoContainerView" destination="hRx-aU-EhQ" id="sVM-rR-LQC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nlq-7v-W2e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4zT-zn-bcr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nlq-7v-W2e" secondAttribute="trailing" id="EHH-7o-FZ2"/>
+                            <constraint firstAttribute="bottom" secondItem="nlq-7v-W2e" secondAttribute="bottom" id="LLc-z7-ysA"/>
+                            <constraint firstItem="nlq-7v-W2e" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ZUP-Ej-LHk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="nlq-7v-W2e" id="49v-N4-CGA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
