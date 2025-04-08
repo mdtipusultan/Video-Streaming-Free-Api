@@ -148,24 +148,29 @@ class MediaCell: UITableViewCell {
     
     func configure(with video: Video) {
         player = AVPlayer(url: video.videoURL)
-        player?.isMuted = false // <--- Enable sound
+        player?.isMuted = true
+
+        // Remove previous playerLayer if any
+        playerLayer?.removeFromSuperlayer()
 
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.videoGravity = .resizeAspect
         playerLayer?.frame = videoContainerView.bounds
 
         if let layer = playerLayer {
-            videoContainerView.layer.addSublayer(layer)
+            // Insert the player layer at the back so UI controls stay visible
+            videoContainerView.layer.insertSublayer(layer, at: 0)
         }
 
         addPeriodicTimeObserver()
-        
+
         // Set duration label
         if let duration = player?.currentItem?.asset.duration {
             let seconds = CMTimeGetSeconds(duration)
             durationLabel.text = formatTime(seconds)
         }
     }
+
 
     
     private func addPeriodicTimeObserver() {

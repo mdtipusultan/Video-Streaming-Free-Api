@@ -35,33 +35,33 @@ class ViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
     }
 
-    private func loadSampleVideos() {
-        let sampleURLs = [
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-        ]
-
-        videos = sampleURLs.compactMap {
-            guard let url = URL(string: $0) else { return nil }
-            return Video(title: "Sample Video", videoURL: url)
-        }
-
-        tableView.reloadData()
-    }
-    
 //    private func loadSampleVideos() {
-//        let videoService = PexelsVideoService()
-//        videoService.fetchVideos { [weak self] videos in
-//            self?.videos = videos
-//            self?.tableView.reloadData()
+//        let sampleURLs = [
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+//        ]
+//
+//        videos = sampleURLs.compactMap {
+//            guard let url = URL(string: $0) else { return nil }
+//            return Video(title: "Sample Video", videoURL: url)
 //        }
+//
+//        tableView.reloadData()
 //    }
+    
+    private func loadSampleVideos() {
+        let videoService = PexelsVideoService()
+        videoService.fetchVideos { [weak self] videos in
+            self?.videos = videos
+            self?.tableView.reloadData()
+        }
+    }
     
 
 
