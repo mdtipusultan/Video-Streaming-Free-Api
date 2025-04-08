@@ -13,11 +13,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var videos: [Video] = []
+    
+    var currentlyPlayingCell: MediaCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         loadSampleVideos()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.playVisibleVideo()
+        }
+
     }
 
     private func setupTableView() {
@@ -28,35 +35,36 @@ class ViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
     }
 
+    private func loadSampleVideos() {
+        let sampleURLs = [
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+        ]
 
+        videos = sampleURLs.compactMap {
+            guard let url = URL(string: $0) else { return nil }
+            return Video(title: "Sample Video", videoURL: url)
+        }
 
+        tableView.reloadData()
+    }
+    
 //    private func loadSampleVideos() {
-//        let sampleURLs = [
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-//            "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-//        ]
-//
-//        videos = sampleURLs.compactMap {
-//            guard let url = URL(string: $0) else { return nil }
-//            return Video(title: "Sample Video", videoURL: url)
+//        let videoService = PexelsVideoService()
+//        videoService.fetchVideos { [weak self] videos in
+//            self?.videos = videos
+//            self?.tableView.reloadData()
 //        }
-//
-//        tableView.reloadData()
 //    }
     
-    private func loadSampleVideos() {
-        let videoService = PexelsVideoService()
-        videoService.fetchVideos { [weak self] videos in
-            self?.videos = videos
-            self?.tableView.reloadData()
-        }
-    }
+
+
 
 }
 
@@ -93,10 +101,18 @@ extension ViewController: UITableViewDelegate {
         }
     }
 
+    
     private func playVisibleVideo() {
         guard let visibleIndexPath = tableView.indexPathsForVisibleRows?.first,
               let cell = tableView.cellForRow(at: visibleIndexPath) as? MediaCell else { return }
 
+        // Stop previous cell
+        if currentlyPlayingCell != cell {
+            currentlyPlayingCell?.stopPlayback()
+            currentlyPlayingCell = cell
+        }
+
+        // Start new video
         cell.playVideo()
     }
 }
