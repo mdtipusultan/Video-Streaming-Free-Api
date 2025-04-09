@@ -18,6 +18,9 @@ class MediaCell: UITableViewCell {
     private var playerLayer: AVPlayerLayer?
     
     private var timeObserverToken: Any?
+    private var video: Video?
+    var onPlaybackTimeUpdate: ((CMTime) -> Void)?
+
     
     //other propirties
     private let backwardButton: UIButton = {
@@ -132,7 +135,6 @@ class MediaCell: UITableViewCell {
     }
 
 
-    
     override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -141,26 +143,35 @@ class MediaCell: UITableViewCell {
             timeObserverToken = nil
         }
 
+        // Save playback time back to the video model
+        if let currentTime = player?.currentTime() {
+            onPlaybackTimeUpdate?(currentTime)
+        }
+
+
         player?.pause()
         playerLayer?.removeFromSuperlayer()
         player = nil
     }
+
     
     func configure(with video: Video) {
+        self.video = video  // Save a reference for updating playback time later
+
         player = AVPlayer(url: video.videoURL)
         player?.isMuted = true
 
-        // Remove previous playerLayer if any
         playerLayer?.removeFromSuperlayer()
-
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.videoGravity = .resizeAspect
         playerLayer?.frame = videoContainerView.bounds
 
         if let layer = playerLayer {
-            // Insert the player layer at the back so UI controls stay visible
             videoContainerView.layer.insertSublayer(layer, at: 0)
         }
+
+        // Seek to saved time
+        player?.seek(to: video.lastPlaybackTime)
 
         addPeriodicTimeObserver()
 

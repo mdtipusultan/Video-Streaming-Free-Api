@@ -5,11 +5,12 @@
 //  Created by Tipu Sultan on 4/8/25.
 //
 
-import Foundation
+import AVFoundation
 
-struct Video: Codable {
+struct Video {
     let title: String
     let videoURL: URL
+    var lastPlaybackTime: CMTime = .zero // New line!
 }
 
 class PexelsVideoService {

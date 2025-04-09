@@ -81,6 +81,11 @@ extension ViewController: UITableViewDataSource {
         
         let video = videos[indexPath.row]
         cell.configure(with: video)
+
+        cell.onPlaybackTimeUpdate = { [weak self] time in
+            self?.videos[indexPath.row].lastPlaybackTime = time
+        }
+
         return cell
     }
     
